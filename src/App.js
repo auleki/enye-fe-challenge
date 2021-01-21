@@ -1,11 +1,12 @@
 import './App.css';
-import ProfileList from './pages/ProfileList'
+// import ProfileList from './pages/ProfileList'
+import PageRoutes from './components/PageRoutes'
 
 function App() {
 
   return (
     <div>
-      <ProfileList />
+      <PageRoutes />
     </div>
   )
 }
