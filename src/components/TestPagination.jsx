@@ -1,6 +1,6 @@
 import React from 'react'
 
-const TestPagination = ({ totalPosts, postsPerPage }) => {    
+const TestPagination = ({ totalPosts, postsPerPage, paginate }) => {    
   const pageNumbers = []
   for(let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
     pageNumbers.push(i)
@@ -11,9 +11,11 @@ const TestPagination = ({ totalPosts, postsPerPage }) => {
         <ul className="pagination">
           { pageNumbers.map(number => (
             <li key={number} className="page-item">
-              <a href="/" className="page-link">
+              <button
+                onClick={() => paginate(number)}
+                className="page-link">
                 {number}
-              </a>
+              </button>
             </li>
           )) }
         </ul>

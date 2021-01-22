@@ -7,7 +7,7 @@ const TestPage = () => {
   const [posts, setPosts] = useState([])
   const [loading, setLoading] = useState(false)
   const [currentPage, setCurrentPage] = useState(1)
-  const [postsPerPage, setPostsPerPage] = useState(10)
+  const [postsPerPage] = useState(10)
 
   useEffect(() => {
     const getPosts = async () => {
@@ -23,12 +23,17 @@ const TestPage = () => {
   const indexOfLastPost = currentPage * postsPerPage 
   const indexOfFirstPost = indexOfLastPost - postsPerPage
   const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost)
+
+  const paginate = pageNumber => setCurrentPage(pageNumber)
     
     return (
       <div>
         <h2 className="mt-3 mb-3 fs-1 px-3 text-primary">Blogs</h2>
-        <TestPosts posts={posts} loading={loading}/>
-        <TestPagination />
+        <TestPosts posts={currentPosts} loading={loading}/>
+        <TestPagination 
+          postsPerPage={postsPerPage} 
+          paginate={paginate}
+          totalPosts={posts.length}/>
       </div>
   )
 }
