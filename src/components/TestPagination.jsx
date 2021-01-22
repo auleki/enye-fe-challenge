@@ -17,7 +17,7 @@ const TestPagination = ({ totalPosts, postsPerPage }) => {
             </li>
           )) }
         </ul>
-      </nav>        
+      </nav>      
   )
 }
 

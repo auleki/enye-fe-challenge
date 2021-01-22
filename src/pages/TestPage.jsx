@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import TestPosts from '../components/TestPosts'
-// import bootstrap from 'bootstrap'
+import TestPagination from '../components/TestPagination'
 
 const TestPage = () => {
   const [posts, setPosts] = useState([])
@@ -25,10 +25,11 @@ const TestPage = () => {
   const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost)
     
     return (
-      <>
-        <h2 className="fs-1 px-3">Blogs</h2>
+      <div>
+        <h2 className="mt-3 mb-3 fs-1 px-3 text-primary">Blogs</h2>
         <TestPosts posts={posts} loading={loading}/>
-      </>
+        <TestPagination />
+      </div>
   )
 }
 
