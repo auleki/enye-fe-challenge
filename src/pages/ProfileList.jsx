@@ -3,15 +3,21 @@ import React, { useState, useEffect } from 'react'
 import { fetchUsers } from "../services/operations";
 import UserEntry from '../components/UserEntry'
 import Navbar from '../components/Navbar'
+import Pagination from '../components/Pagination'
 
 const ProfileList = () => {
   const [users, setUsers] = useState([])
+  const [loading, setLoading] = useState(false)
+  const [currentPage, setCurrentPage] = useState(1)
+  const [usersPerPage] = useState(10)
   
   useEffect(() => {
     const retrieveUsers = async () => {
       try {
+        setLoading(true)
         const { data } = await fetchUsers()
         setUsers(data.records.profiles)        
+        setLoading(false)
       } catch (error) {
         console.error(error)
       }
@@ -19,7 +25,13 @@ const ProfileList = () => {
     retrieveUsers()
   }, [])
 
+  const indexOfLastUser = currentPage * usersPerPage
+  const indexOfFirstUser = indexOfLastUser - usersPerPage
+  const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser)
+
   console.log(users)
+
+  const paginate = pageNumber => setCurrentPage(pageNumber)
 
   return (
     <>
@@ -53,8 +65,13 @@ const ProfileList = () => {
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
-                    { users.map((user, i) => <UserEntry key={i} user={user} />) }
+                    { currentUsers.map((user, i) => <UserEntry key={i} user={user} />) }
                 </tbody>
+                <Pagination 
+                  totalUsers={users.length}
+                  usersPerPage={usersPerPage}
+                  paginate={paginate}
+                  />
               </table>
             </div>
           </div>
