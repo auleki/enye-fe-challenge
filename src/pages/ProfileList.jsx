@@ -9,14 +9,14 @@ const ProfileList = () => {
   const [users, setUsers] = useState([])
   const [loading, setLoading] = useState(false)
   const [currentPage, setCurrentPage] = useState(1)
-  const [usersPerPage] = useState(10)
-  
+  const [usersPerPage] = useState(5)
+
   useEffect(() => {
     const retrieveUsers = async () => {
       try {
         setLoading(true)
         const { data } = await fetchUsers()
-        setUsers(data.records.profiles)        
+        setUsers(data.records.profiles)
         setLoading(false)
       } catch (error) {
         console.error(error)
@@ -35,7 +35,7 @@ const ProfileList = () => {
 
   return (
     <>
-      <Navbar/>
+      <Navbar />
       <div className="flex flex-col">
         <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
@@ -50,13 +50,13 @@ const ProfileList = () => {
                       Last Name
               </th>
                     <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Gender
+                      Gender
               </th>
                     <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Username
+                      Username
               </th>
 
-              <th scope="col" className="ml-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th scope="col" className="ml-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                       URL
               </th>
                     {/* <th scope="col" className="relative px-6 py-3">
@@ -65,13 +65,16 @@ const ProfileList = () => {
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
-                    { currentUsers.map((user, i) => <UserEntry key={i} user={user} />) }
+                  {!loading
+                    ? currentUsers.map((user, i) => <UserEntry key={i} user={user} />)
+                    : <h1>Loading...</h1>
+                  }
                 </tbody>
-                <Pagination 
+                <Pagination
                   totalUsers={users.length}
                   usersPerPage={usersPerPage}
                   paginate={paginate}
-                  />
+                />
               </table>
             </div>
           </div>
