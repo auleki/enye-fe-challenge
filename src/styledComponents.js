@@ -23,8 +23,15 @@ export const InputField = styled.input`
   }
 `
 
+export const SelectField = styled.select`
+  padding: .5em 1em;
+  background-color: #EBEBD3;
+`
+
 export const Button = styled.button`
   padding: .5em 1.5em;
+  outline: 0;
+  border: 0;
   background: #1446A0;
   color: #fff;
   ${({ mx }) => mx && css`
@@ -32,8 +39,10 @@ export const Button = styled.button`
   `
   }
 
-  &:hover {
+  &:hover, &:focus {
     background: #1a1a1a;
+    outline: 0;
+    border: 0;
     /* background: #ffffff; */
     color: #fff;
     /* color: #1446A0; */
@@ -41,5 +50,9 @@ export const Button = styled.button`
     box-shadow: -3px 4px 5px 0px rgba(202,202,202,0.75);
 -webkit-box-shadow: -3px 4px 5px 0px rgba(202,202,202,0.75);
 -moz-box-shadow: -3px 4px 5px 0px rgba(202,202,202,0.75);
+  }
+
+  &:active {
+    transform: translateY(2px);
   }
 `
